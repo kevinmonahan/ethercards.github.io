@@ -73,7 +73,7 @@ $(document).ready(function() {
 	$(window).scroll(function(){	
 		"use strict";	
 		var scroll = $(window).scrollTop();
-		if( scroll > 10 ){		
+		if( scroll > 10 ){
 			$(".navbar").addClass("scroll-fixed-navbar");				
 		} else {
 			$(".navbar").removeClass("scroll-fixed-navbar");
