@@ -216,6 +216,7 @@ Line Font
 /* ==========================================================================
 Headline
 ========================================================================== */ 
+section:first-of-type .title:after { margin-top: 30px;}
 .title {margin-bottom: 80px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.03); text-align: center; position: relative;}
 .title:after {display:inline-block; text-align:center; font-family: Ionicons; content:"\f123"; position:absolute; right: 0; left: 0; margin:0 auto; font-size: 10px; margin-top: 5px; height: 30px; width: 30px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.03); background: #FFF; line-height: 30px;}
 .title p {font-family: "Crimson Text", serif; font-size: 18px; font-style: italic; color: #666;}
