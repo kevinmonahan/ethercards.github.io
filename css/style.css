@@ -580,3 +580,7 @@ Media Queries
 	.banner-content h1 { font-size: 36px; line-height: 49px;}
 	.video-container iframe {height: 200px;}
 }
+
+#checkresult {
+	margin-top: 1em;
+}
