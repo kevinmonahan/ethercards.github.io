@@ -1,8 +1,3 @@
-jQuery(window).load(function() {
-    $(".loader-centered").fadeOut();
-    $(".loader").delay(400).fadeOut("slow");
-});
-
 var depositInterface = [
   {
     "constant": true,
