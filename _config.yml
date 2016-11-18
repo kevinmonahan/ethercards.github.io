@@ -42,7 +42,7 @@ share_stumbleupon: false
 
 # Build settings
 permalink:    /blog/:categories/:year/:month/:day/:title/
-paginate:     3
+paginate:     10
 paginate_path: "/blog/page:num/"
 sass:
   compressed: true
