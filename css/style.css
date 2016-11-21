@@ -359,8 +359,8 @@ Pricing
 .table-list li:last-child {border-bottom: none; margin-bottom: 10px;}
 .table-list del {color: #D0D0D0;}
 .table-buy {display: block; padding:15px 0;}
-.table-buy input[type=submit], .table-buy a {color: #FFF; background: #1a1a1a; padding: 10px; display: block; width: 100%; margin:0 auto; text-align: center; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; border: 1px solid #1a1a1a;}
-.table-buy input[type=submit]:hover, .table-buy a:hover { background: #FFF; color: #1a1a1a;}
+.table-buy input[type=button], .table-buy a {color: #FFF; background: #1a1a1a; padding: 10px; display: block; width: 100%; margin:0 auto; text-align: center; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; border: 1px solid #1a1a1a;}
+.table-buy input[type=button]:hover, .table-buy a:hover { background: #FFF; color: #1a1a1a;}
 
 .price-label {font-weight: bold; font-style: normal; font-family: "Montserrat"; margin-left: 5px;}
 

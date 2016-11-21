@@ -97,7 +97,8 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="submit" value="Buy Now">
+							<input type="hidden" name="custom" class="custom" value="">
+							<input type="button" value="Buy Now">
 						</form>
 					</div>
 				</div>
@@ -128,7 +129,8 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="submit" value="Buy Now">
+							<input type="hidden" name="custom" class="custom" value="">
+							<input type="button" value="Buy Now">
 						</form>
 					</div>
 				</div>
@@ -175,7 +177,8 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="submit" value="Buy Now">
+							<input type="hidden" name="custom" class="custom" value="">
+							<input type="button" value="Buy Now">
 						</form>
 					</div>
 				</div>
@@ -206,7 +209,8 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="submit" value="Buy Now">
+							<input type="hidden" name="custom" class="custom" value="">
+							<input type="button" value="Buy Now">
 						</form>
 					</div>
 				</div>
@@ -376,3 +380,18 @@ layout: default
 		</div>
 	</div>
 </section>
+
+<script>
+	$("form input[type=button]").click(function() {
+		var self = this;
+		ga(function(tracker) {
+			$(self).parents('form').find('.custom').val(tracker.get('clientId'));
+			ga('send', 'event', 'cards', 'order', {
+				'hitCallback': function() {
+					$(self).parents('form').first().submit();
+				}
+			});
+		});
+		return !window.ga;
+	});
+</script>
