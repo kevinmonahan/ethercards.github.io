@@ -89,7 +89,7 @@ layout: default
 							<input type="hidden" name="cmd" value="_cart_add">
 							<input type="hidden" name="cart_name" value="ethercards">
 							<input type="hidden" name="merchant" value="d64a2194139ac9307c67e0ab6d908f88">
-							<input type="hidden" name="item_name" value="Ether Cards">
+							<input type="hidden" name="item_name" value="Ether Cards (Xmas Tree Design)">
 							<input type="hidden" name="item_number" value="AL-ETHERCARDS-TREES">
 							<input type="hidden" name="currency" value="ETH">
 							<input type="hidden" name="amountf" value="0.25000000">
@@ -97,7 +97,7 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="hidden" name="custom" class="custom" value="">
+							<input type="hidden" name="custom" value="">
 							<input type="button" value="Buy Now">
 						</form>
 					</div>
@@ -121,7 +121,7 @@ layout: default
 							<input type="hidden" name="cmd" value="_cart_add">
 							<input type="hidden" name="cart_name" value="ethercards">
 							<input type="hidden" name="merchant" value="d64a2194139ac9307c67e0ab6d908f88">
-							<input type="hidden" name="item_name" value="Ether Cards">
+							<input type="hidden" name="item_name" value="Ether Cards (Snowflake Design)">
 							<input type="hidden" name="item_number" value="AL-ETHERCARDS-SNOWFLAKE">
 							<input type="hidden" name="currency" value="ETH">
 							<input type="hidden" name="amountf" value="0.25000000">
@@ -129,7 +129,7 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="hidden" name="custom" class="custom" value="">
+							<input type="hidden" name="custom" value="">
 							<input type="button" value="Buy Now">
 						</form>
 					</div>
@@ -177,7 +177,7 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="hidden" name="custom" class="custom" value="">
+							<input type="hidden" name="custom" value="">
 							<input type="button" value="Buy Now">
 						</form>
 					</div>
@@ -201,7 +201,7 @@ layout: default
 							<input type="hidden" name="cmd" value="_cart_add">
 							<input type="hidden" name="cart_name" value="ethercards">
 							<input type="hidden" name="merchant" value="d64a2194139ac9307c67e0ab6d908f88">
-							<input type="hidden" name="item_name" value="Ether Cards">
+							<input type="hidden" name="item_name" value="Ether Cards (ETHNews.com design)">
 							<input type="hidden" name="item_number" value="AL-ETHERCARDS-EN">
 							<input type="hidden" name="currency" value="ETH">
 							<input type="hidden" name="amountf" value="0.25000000">
@@ -209,7 +209,7 @@ layout: default
 							<input type="hidden" name="allow_quantity" value="1">
 							<input type="hidden" name="want_shipping" value="1">
 							<input type="hidden" name="allow_extra" value="1">
-							<input type="hidden" name="custom" class="custom" value="">
+							<input type="hidden" name="custom" value="">
 							<input type="button" value="Buy Now">
 						</form>
 					</div>
@@ -382,15 +382,23 @@ layout: default
 </section>
 
 <script>
+	ga('require', 'ec');
+	ga(function(tracker) {
+		$('form [name=custom]').val(tracker.get('clientId'));
+	});
 	$("form input[type=button]").click(function() {
-		var self = this;
-		ga(function(tracker) {
-			$(self).parents('form').find('.custom').val(tracker.get('clientId'));
-			ga('send', 'event', 'cards', 'order', {
-				'hitCallback': function() {
-					$(self).parents('form').first().submit();
-				}
-			});
+		var self = $(this).parents('form').first();
+		ga('ec:addProduct', {
+			'id': self.find('[name=item_number]').val(),
+			'name': self.find('[name=item_name]').val(),
+			'price': self.find('[name=amountf]').val(),
+			'quantity': self.find('[name=quantity]').val(),
+		});
+		ga('ec:setAction', 'add');
+		ga('send', 'event', 'UX', 'click', 'buy now', {
+			'hitCallback': function() {
+				self.submit();
+			}
 		});
 		return !window.ga;
 	});
