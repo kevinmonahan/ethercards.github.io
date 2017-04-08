@@ -157,3 +157,7 @@ $(document).on('click','.navbar-collapse.in',function(e) {
     }
 });
 
+function addProduct(product) {
+    Ecwid.Cart.addProduct(product);
+    window.location.hash = '/#!/~/cart';
+}
