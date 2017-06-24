@@ -49,3 +49,7 @@ sass:
 
 gems:
 - jekyll-paginate
+- jekyll-browserify
+
+browserify:
+  npm_install: true

@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<section id="redeem" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 title">
+                <h2>Redeem your Ether Card</h2>
+                <p>Enter the 12 words from under the scratch panel on the back of your Ether Card here to redeem it.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="bottom-form">
+                    <textarea class="form-control bottom-form-input" id="mnemonic" placeholder="Mnemonic words"></textarea>
+                </div>
+            </div>
+        </div>
+        <script type="x-tmpl-mustache" id="wallet-template">{% raw %}
+            <p>This card has address {{address}}</p>
+            {{#depositValue}}
+                <h3><i class="ion-checkmark-circled"></i> Valid Card</h3>
+                <p>Yes! This is a valid Ether Card. A total of <b>{{depositValue}} ether</b> was deposited into the guarantee account for it. The guarantee expires <b>{{depositExpires}}</b>.
+                </p>
+            {{/depositValue}}
+            <div class="bottom-form">
+                <h3>Balances</h3>
+                <table>
+                    {{#balances}}
+                        <tr><th><input type="radio" class="balanceradio" name="balance" value="{{type}}"></th><td>{{balance}} {{typename}}</td></tr>
+                    {{/balances}}
+                </table>
+
+                <h3>Sweep to</h3>
+                <table>
+                    {{#targets}}
+                        <tr><th><input type="radio" class="targetradio" name="target" value="{{address}}"></th><td>{{address}}</td></tr>
+                    {{/targets}}
+                    <tr><th><input type="radio" id="manualtarget" class="targetradio" name="target" value=""></td><td><input type="text" id="targetinput" placeholder="foo.eth or 0x1234..."/></td></tr>
+                </table>
+                <button type="button" id="sweepbutton" class="btn btn-submit" disabled="disabled">Sweep</button>
+            </div>
+        {% endraw %}</script>
+        <div class="row">
+            <div id="wallet" class="col-md-8 col-md-offset-2">
+            </div>
+        </div>
+    </div>
+</section>
