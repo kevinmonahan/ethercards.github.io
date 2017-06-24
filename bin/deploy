@@ -27,6 +27,7 @@ git checkout -b $BRANCH
 
 # Build site.
 npm install
+bundle install --local
 bundle exec jekyll build
 
 # Delete and move files.
