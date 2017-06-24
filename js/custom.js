@@ -1,6 +1,6 @@
 ---
 ---
-//require("es6-shim");
+require("es6-shim");
 var bip39 = require("bip39");
 var Promise = require("bluebird");
 var Mustache = require("mustache");
