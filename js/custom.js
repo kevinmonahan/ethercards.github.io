@@ -189,7 +189,7 @@ function buildRedemptionForm(web3, wallet) {
 
 $(document).ready(function() {
     var providerURL = 'https://mainnet.infura.io/Rg6BrBl8vIqJBc7AlL9h';
-    if(web3 === undefined) {
+    if(typeof web3 !== 'undefined') {
         web3 = new Web3();
         web3.setProvider(new web3.providers.HttpProvider(providerURL));
     }
