@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/ethercards/ethercards.github.io#readme",
   "dependencies": {
+    "babel-preset-stage-0": "^6.24.1",
     "bip39": "^2.2.0",
     "bluebird": "^3.5.0",
     "es6-shim": "^0.35.3",
