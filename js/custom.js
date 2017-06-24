@@ -304,8 +304,3 @@ $(document).on('click','.navbar-collapse.in',function(e) {
         $(this).collapse('hide');
     }
 });
-
-function addProduct(product) {
-    Ecwid.Cart.addProduct(product);
-    window.location.hash = '/#!/~/cart';
-}

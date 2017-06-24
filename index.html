@@ -309,3 +309,9 @@ layout: default
 	});
 </script>
 <script type="text/javascript" data-cfasync="false" src="https://app.ecwid.com/script.js?11346531&amp;data_platform=code&amp;data_date=2017-04-02" charset="utf-8"></script>
+<script type="text/javascript">
+	function addProduct(product) {
+	    Ecwid.Cart.addProduct(product);
+	    window.location.hash = '/#!/~/cart';
+	}
+</script>
