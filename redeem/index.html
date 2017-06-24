@@ -18,12 +18,15 @@ layout: default
             </div>
         </div>
         <script type="x-tmpl-mustache" id="wallet-template">{% raw %}
-            <p>This card has address {{address}}</p>
             {{#depositValue}}
                 <h3><i class="ion-checkmark-circled"></i> Valid Card</h3>
                 <p>Yes! This is a valid Ether Card. A total of <b>{{depositValue}} ether</b> was deposited into the guarantee account for it. The guarantee expires <b>{{depositExpires}}</b>.
                 </p>
             {{/depositValue}}
+            <p>This card has address <a href="https://etherscan.io/address/{{address}}">{{address}}</a>.</p>
+            {{^balances}}
+                <p>Sorry! This card has no funds on it.</p>
+            {{/balances}}
             <div class="bottom-form">
                 <h3>Balances</h3>
                 <table>
