@@ -110,9 +110,6 @@ function buildRedemptionForm(web3, wallet) {
         var tokenBalances = results.slice(2);
 
         var balances = [];
-        if(etherBalance > 0) {
-            balances.push({type: 'ether', balance: web3.fromWei(etherBalance).toNumber(), typename: 'ether'});
-        }
         for(var i = 0; i < tokenBalances.length; i++) {
             if(tokenBalances[i] == 0) continue;
             balances.push({type: i, typename: tokenList[i].symbol, balance: tokenBalances[i] / Math.pow(10, tokenList[i].decimal)});
@@ -129,6 +126,9 @@ function buildRedemptionForm(web3, wallet) {
             depositValue: depositValue,
             depositExpires: depositExpires,
             balances: balances,
+            etherBalance: web3.fromWei(etherBalance).toNumber(),
+            hasBalances: balances.length > 0 || etherBalance > 0,
+            hasTokenBalances: balances.length > 0,
             targets: targets,
         });
         $("#wallet").html(rendered);
@@ -189,7 +189,7 @@ function buildRedemptionForm(web3, wallet) {
 
 $(document).ready(function() {
     var providerURL = 'https://mainnet.infura.io/Rg6BrBl8vIqJBc7AlL9h';
-    if(typeof web3 !== 'undefined') {
+    if(typeof web3 === 'undefined') {
         web3 = new Web3();
         web3.setProvider(new web3.providers.HttpProvider(providerURL));
     }

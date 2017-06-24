@@ -7,7 +7,7 @@ layout: default
         <div class="row">
             <div class="col-md-8 col-md-offset-2 title">
                 <h2>Redeem your Ether Card</h2>
-                <p>Enter the 12 words from under the scratch panel on the back of your Ether Card here to redeem it.</p>
+                <p>Enter the 12 words from under the scratch panel on the back of your Ether Card here to redeem it. Before you can redeem your card, you will need to set up an <a data-toggle="modal" data-target="#aboutAccountsModal" style="cursor: pointer">Ethereum account</a></p>
             </div>
         </div>
         <div class="row">
@@ -27,23 +27,38 @@ layout: default
             {{^balances}}
                 <p>Sorry! This card has no funds on it.</p>
             {{/balances}}
-            <div class="bottom-form">
-                <h3>Balances</h3>
-                <table>
-                    {{#balances}}
-                        <tr><th><input type="radio" class="balanceradio" name="balance" value="{{type}}"></th><td>{{balance}} {{typename}}</td></tr>
-                    {{/balances}}
-                </table>
+            {{#hasBalances}}
+                <div class="bottom-form">
+                    <h3>Balances</h3>
+                    <table>
+                        {{#balances}}
+                            <tr><th><input type="radio" class="balanceradio" name="balance" value="{{type}}"></th><td>{{balance}} {{typename}}</td></tr>
+                        {{/balances}}
+                        {{#etherBalance}}
+                            <tr><th>
+                                <input type="radio" class="balanceradio" name="balance" value="ether">
+                            </th><td>
+                                {{etherBalance}} ether
+                                {{#hasTokenBalances}}<i class="ion-alert-circled" data-toggle="modal" data-target="#etherWarningModal" style="cursor: pointer"></i>{{/hasTokenBalances}}
+                            </td></tr>
+                        {{/etherBalance}}
+                    </table>
 
-                <h3>Sweep to</h3>
-                <table>
-                    {{#targets}}
-                        <tr><th><input type="radio" class="targetradio" name="target" value="{{address}}"></th><td>{{address}}</td></tr>
-                    {{/targets}}
-                    <tr><th><input type="radio" id="manualtarget" class="targetradio" name="target" value=""></td><td><input type="text" id="targetinput" placeholder="foo.eth or 0x1234..."/></td></tr>
-                </table>
-                <button type="button" id="sweepbutton" class="btn btn-submit" disabled="disabled">Sweep</button>
-            </div>
+                    <h3>Sweep to</h3>
+                    <table>
+                        {{#targets}}
+                            <tr><th><input type="radio" class="targetradio" name="target" value="{{address}}"></th><td>{{address}}</td></tr>
+                        {{/targets}}
+                        <tr><th>
+                            <input type="radio" id="manualtarget" class="targetradio" name="target" value="">
+                        </th><td>
+                            <input type="text" id="targetinput" placeholder="foo.eth or 0x1234..."/>
+                            <i class="ion-information-circled" data-toggle="modal" data-target="#aboutAccountsModal" style="cursor: pointer"></i>
+                        </td></tr>
+                    </table>
+                    <button type="button" id="sweepbutton" class="btn btn-submit" disabled="disabled">Sweep</button>
+                </div>
+            {{/hasBalances}}
         {% endraw %}</script>
         <div class="row">
             <div id="wallet" class="col-md-8 col-md-offset-2">
@@ -51,3 +66,49 @@ layout: default
         </div>
     </div>
 </section>
+<div class="modal" id="aboutAccountsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ethereum Accounts</h4>
+            </div>
+            <div class="modal-body">
+                <p>Claiming the funds or tokens off your Ether Card requires you to have an Ethereum account. If you don't have one already, here are a few options to choose from:</a>
+
+                <h3><a href="https://github.com/ethereum/mist/releases">Mist or Ethereum Wallet</a></h3>
+                <p>The Ethereum Foundation develops the Mist browser, as well as the Ethereum Wallet application, for Windows, OS X and Linux. The Mist browser is a full fledged web browser with Ethereum support built in, while the Ethereum Wallet app is a cut down version with only wallet functionality. Both require downloaidng the Ethereum blockchain to your computer, which will take a couple of hours, but gives you an entirely decentralised connection to Ethereum, with no trusted third-parties.</p>
+
+                <h3><a href="https://parity.io/">Parity</a></h3>
+                <p>Parity is an Ethereum client and browser plugin for Windows, OS X and Linux, developed by the independent Parity Technologies. Like Mist, it's a full fledged Ethereum client that will require you to download a copy of the blockchain, and give you a fully independent connection to the Ethereum network.</p>
+
+                <h3><a href="https://www.myetherwallet.com/">My Ether Wallet</a></h3>
+                <p>My Ether Wallet is an Ethereum wallet built as a browser application. You can instantly create and download a wallet using your existing web browser, and use your wallet to send Ether, tokens, and engage in other interactions with the Ethereum blockchain. Unlike Mist and Parity, MEW runs entirely in your browser and doesn't require to download or synchronise anything; consequently it relies on services hosted by MEW and others for its connection.</p>
+
+                <h3><a href="https://metamask.io/">Metamask</a></h3>
+                <p>Metamask is a browser plugin for Chrome that adds support for Ethereum directly into your browser. Like My Ether Wallet, Metamask relies on servers maintained by a single organisation for its functionality.</p>
+
+                <hr/>
+
+                <p>Once you have chosen a solution and created a wallet, you will need to paste the address of your new wallet into the textbox in order to sweep your tokens or funds to it.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="etherWarningModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sweeping Ether and Tokens</h4>
+            </div>
+            <div class="modal-body">
+                <p>Your card has both Ether and Tokens on it. A small amount of Ether is required to pay for transactions that transfer tokens - so if you sweep your Ether first, you will not be able to sweep the tokens!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
